@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Evento</title>
+</head>
+
+<body>
+	<div class="container my-2">
+		<h2>Evento</h2>
+		<form action="#" th:action="@{/events/new}" th:object="${event}" method="POST">
+			<input type="hidden" th:field="*{id}" id="id">
+			
+			<span th:if="${#fields.hasErrors('eventName')}" th:errors="*{eventName}"></span>
+			<input type="text" th:field="*{eventName}" placeholder="Nome do Evento" class="form-control mb-4 col-4"> 
+			
+			<span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}"></span>
+			<input type="date" th:field="*{dateStart}" placeholder="Data de inicio" class="form-control mb-4 col-4">
+		
+		<span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}"></span>
+			<input type="date" th:field="*{dateEnd}" placeholder="Data final" class="form-control mb-4 col-4">
+			
+			<span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span>
+			<input type="text" th:field="*{location}" placeholder="Localizacao" class="form-control mb-4 col-4">
+			
+			<div class="form-group">
+			    <label for="coord">Coordenador(a) do Evento</label>
+    <select class="form-control" id="coord" th:field="*{coord.id}">
+        <option value="">Selecione um(a) Coordenador(a) para o Evento</option>
+        <option th:each="coord : ${coords}" th:value="${coord.id}" th:text="${coord.getFullName()}"></option>
+    </select>
+			</div>
+			
+			<button type="submit" class="btn col-2" style="background-color: #359830; color:#FFFFFF;">Salvar</button>
+		</form>
+		<hr>
+		<a th:field="@{/events}" href="/events">Eventos</a>
+	</div>
+</body>
+</html>

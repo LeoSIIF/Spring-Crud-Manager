@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Coordenador</title>
+</head>
+
+<body>
+	<div class="container my-2">
+		<h2>Coordenador</h2>
+		<form action="#" th:action="@{/coords/new}" th:object="${coord}" method="POST">
+			<input type="hidden" th:field="*{id}" id="id">
+			
+			<span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+			<input type="text" th:field="*{fullName}" placeholder="Nome Completo" class="form-control mb-4 col-4"> 
+			
+			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			<input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
+			
+			<span th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></span>
+			<input type="text" th:field="*{number}" placeholder="Numero de Celular" class="form-control mb-4 col-4">
+			
+			<select th:field="*{role}" class="form-control mb-4 col-4">
+    <option value="Docente" th:selected="${coord.role == 'Docente'}">Docente</option>
+    <option value="TAE" th:selected="${coord.role == 'TAE'}">TAE</option>
+</select>
+					
+			<button type="submit" class="btn col-2" style="background-color: #359830; color:#FFFFFF;">Salvar</button>
+		</form>
+		<hr>
+		<a th:field="@{/coords}" href="/coords">Coordenadores</a>
+	</div>
+</body>
+</html>
